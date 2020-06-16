@@ -71,31 +71,31 @@ class Controller
 
 		def add_first_emoji
 			puts "Select your first emoji!"
-			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
-			@@first_emoji = prompt.select("Select an emoji", sound)
+			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.emoji}}
+			@@first_emoji = prompt.select("Select an emoji", emoji)
 			@@all << @@first_emoji
 			add_second_emoji
 		end
 		def add_second_emoji
 			puts "Select your second emoji!"
-			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
-			@@second_emoji = prompt.select("Select an emoji", sound)
+			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.emoji}}
+			@@second_emoji = prompt.select("Select an emoji", emoji)
 			@@all << @@second_emoji
 			add_third_emoji
 		end
 
 		def add_third_emoji
 			puts "Select your third emoji!"
-			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
-			@@third_emoji = prompt.select("Select an emoji", sound)
+			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.emoji}}
+			@@third_emoji = prompt.select("Select an emoji", emoji)
 			@@all << @@third_emoji
 			add_fourth_emoji
 		end
 
 			def add_fourth_emoji
 			puts "Select your fourth emoji!"
-			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
-			@@fourth_emoji = prompt.select("Select an emoji", sound)
+			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.emoji}}
+			@@fourth_emoji = prompt.select("Select an emoji", emoji)
 			@@all << @@fourth_emoji
 			idk
 		end
@@ -103,7 +103,14 @@ class Controller
 	end
 
 	def idk
-		puts @@all
+		@@all
+		@new_board = (
+		puts "| #{@@all[0]} | #{@@all[1]} |"
+		puts "---------"
+		puts "| #{@@all[2]} | #{@@all[3]} |")
+		puts ""
+		puts "Select a number 1-4"
+
 	end
 
 end
