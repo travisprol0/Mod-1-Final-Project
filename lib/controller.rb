@@ -30,23 +30,37 @@ class Controller
 	end
 
 	def display_board
-		@board
-		# @chosen_sampler.sounds
-		# @new_board = (puts "| #{@board[0]} | #{@board[1]} |"
-		# puts "---------"
-		# puts "| #{@board[2]} | #{@board[3]} |")
-		# @new_board
-		# puts ""
-		# puts "Select a number 1-4"
+		@new_board = (
+		puts "| #{@board[0]} | #{@board[1]} |"
+		puts "---------"
+		puts "| #{@board[2]} | #{@board[3]} |")
+		puts ""
+		puts "Select a number 1-4"
+
+		puts_sounds
+
+
 	end
 
 	def puts_sounds
-
+			answer = gets.chomp
+			answer = answer.to_i
+			answer = answer - 1
+			
+			if answer > 3 
+				puts "Please choose a number between 1-4"
+				sleep(2)
+				display_board
+			else
+				@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
+				puts @sounds[answer]
+				display_board
+			end
 	end
 	
 	#@chosen_sampler.sounds
 	
-	
+	# @board = SamplerSound.all.map{|sound| sound.sound.emoji}
 	
 	
 	

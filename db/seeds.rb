@@ -13,7 +13,7 @@ duck = Sound.create(emoji: "🦆", noise: "quack!!!")
 guitar = Sound.create(emoji: "🎸", noise: "guitar")
 piano = Sound.create(emoji: "🎹", noise: "piano")
 trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
-violen = Sound.create(emoji: "🎻", noise: "violin")
+violin = Sound.create(emoji: "🎻", noise: "violin")
 banjo = Sound.create(emoji: "🪕", noise: "banjo")
 sax = Sound.create(emoji: "🎷", noise: "Saxophone")
 
@@ -26,11 +26,17 @@ SamplerSound.create(sound: cat, sampler: animals)
 SamplerSound.create(sound: frog, sampler: animals)
 SamplerSound.create(sound: duck, sampler: animals)
 
+SamplerSound.create(sound: guitar, sampler: music)
+SamplerSound.create(sound: piano, sampler: music)
+SamplerSound.create(sound: trumpet, sampler: music)
+SamplerSound.create(sound: violin, sampler: music)
+
+
 # SamplerSound.new()
 
 
 # -----------
-# |  | 🐱 |
+# | 🐶 | 🐱 |
 # -----------
 # | 🐸 | 🦊 |
 # -----------
