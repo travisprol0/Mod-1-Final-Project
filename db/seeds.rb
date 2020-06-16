@@ -6,7 +6,7 @@ SamplerSound.delete_all
 dog = Sound.create(emoji: "🐶", noise: "woof")
 cat = Sound.create(emoji: "🐱", noise: "meow")
 frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
-fox = Sound.create(emoji: "🦊", noise: "rooooor")
+lion = Sound.create(emoji: "🦁", noise: "rawr")
 cow = Sound.create(emoji: "🐮", noise: "mooo")
 duck = Sound.create(emoji: "🦆", noise: "quack!!!")
 

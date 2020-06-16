@@ -6,16 +6,17 @@ class Controller
 	def greetings
 		puts "Welcome to Sampler Sounds"
 		 prompt.select("What would you like to do?") do |menu|
-	      menu.choice "Create a sampler", -> { create_sampler }
+	      menu.choice "Create a sampler", -> {create_sampler}
 		  menu.choice "Use an existing sampler", -> {choose_sampler}
-		  menu.choice 
+		  menu.choice "Delete a sampler", -> {destroy_sampler}
 	  	end
 	end
 	def choose_sampler
 		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
 		sampler_id = prompt.select("Select an existing sampler", samplers)		#array of hashes, iterate through Sampler.all, key is name of sampler, value is id of the sampler 
 		@chosen_sampler = Sampler.find_by(id: sampler_id)
-		board		#generalize this
+		board
+		end
 	end
 	def board
 		@board = @chosen_sampler.sounds.map {|sound| sound.emoji}
@@ -37,7 +38,7 @@ class Controller
 			answer = gets.chomp
 			answer = answer.to_i
 			answer = answer - 1
-			if answer > 3 || answer <= 0
+			if answer > 3 || answer < 0
 				puts "Please choose a number between 1-4"
 				sleep(2)
 				display_board
@@ -48,8 +49,7 @@ class Controller
 			end
 	end
 	def create_sampler
-		puts "Enter the name of your new sampler!"
-		sampler_name = gets.chomp
+		sampler_name = prompt.ask("What is the name of your new sampler?", required: true)
 		@new_sampler = Sampler.create(name: sampler_name)
 		add_emojis
 	end
@@ -61,7 +61,6 @@ class Controller
 			@@first_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@first_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )
-			binding.pry
 			@@all << sound
 			add_second_emoji
 		end
@@ -102,7 +101,46 @@ class Controller
 		puts "| #{emojis[2]} | #{emojis[3]} |")
 		puts ""
 		puts "Select a number 1-4"
+		puts_sounds
+	end
+
+	def puts_sounds
+			answer = gets.chomp
+			answer = answer.to_i
+			answer = answer - 1
+			
+			if answer > 3 || answer < 0
+				puts "Please choose a number between 1-4"
+				sleep(2)
+			else
+				@sounds = @@all.map {|emoji| emoji.noise}
+				puts @sounds[answer]
+				chicken
+			end
+	end
+
+	def destroy_sampler
+		if Sampler.count == 0
+			puts "You have no samplers!"
+			sleep(2)
+			greetings
+		else
+			puts "Here are your samplers:
+			#{Sampler.all.map{|sampler| sampler.name}}"
+			sampler_to_destroy = prompt.ask("Type the name of the sampler you would like to delete", required: true)
+			Sampler.find_by(name: sampler_to_destroy).destroy
 	end
 end
-# samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
-# sampler_id = prompt.select("Select an existing sampler", samplers)
+
+
+
+
+
+# def greetings
+# 		puts "Welcome to Sampler Sounds"
+# 		 prompt.select("What would you like to do?") do |menu|
+# 	      menu.choice "Create a sampler", -> {create_sampler}
+# 		  menu.choice "Use an existing sampler", -> {choose_sampler}
+# 		  menu.choice "Delete a sampler", -> {destroy_sampler}
+# 	  	end
+# 	end
