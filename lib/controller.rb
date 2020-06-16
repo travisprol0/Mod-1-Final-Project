@@ -8,8 +8,9 @@ class Controller
 	def greetings
 		puts "Welcome to Sampler Sounds"
 		 prompt.select("What would you like to do?") do |menu|
-	      menu.choice "Create a sampler", -> { puts "hi" }
-	      menu.choice "Use an existing sampler", -> {choose_sampler}
+	      menu.choice "Create a sampler", -> { create_sampler }
+		  menu.choice "Use an existing sampler", -> {choose_sampler}
+		  menu.choice 
 	  	end
 	end
 
@@ -47,7 +48,7 @@ class Controller
 			answer = answer.to_i
 			answer = answer - 1
 			
-			if answer > 3 
+			if answer > 3 || answer <= 0
 				puts "Please choose a number between 1-4"
 				sleep(2)
 				display_board
@@ -58,56 +59,55 @@ class Controller
 			end
 	end
 	
-	#@chosen_sampler.sounds
-	
-	# @board = SamplerSound.all.map{|sound| sound.sound.emoji}
-	
-	
-	
-	# def play_sounds
-	# 	puts "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
-	# 	user_input = gets.chomp
-	# end
-	
-	
-	# def define_board
-    #     @board = [" ", " ", " ", " "]
-    # end
+	def create_sampler
+		puts "Enter the name of your new sampler!"
+		sampler_name = gets.chomp
+		Sampler.create(name: sampler_name)
+		add_emojis
+	end
 
-    # def display_board
-    #     puts "| #{@board[0]} | #{@board[1]} |"
-    #     puts "---------"
-    #     puts "| #{@board[2]} | #{@board[3]} |"
-    # end
+	def add_emojis
+		@@all = []
 
-	# animal-board
-	# Sound.create(emoji: "🐶", noise: "woof")
-	# Sound.create(emoji: "🐱", noise: "meow")
-	# Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
-	# Sampler.create(name: "Animals", sampler_id: 1)
-	# animals = SamplerSound.where("sampler_id = 1" )
-	# animal_emoji = animals.map{|animal| animal.sound}
-	# animal_emoji.map{|animal| animal.emoji}
+		def add_first_emoji
+			puts "Select your first emoji!"
+			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
+			@@first_emoji = prompt.select("Select an emoji", sound)
+			@@all << @@first_emoji
+			add_second_emoji
+		end
+		def add_second_emoji
+			puts "Select your second emoji!"
+			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
+			@@second_emoji = prompt.select("Select an emoji", sound)
+			@@all << @@second_emoji
+			add_third_emoji
+		end
 
-	# dog = Sound.create(emoji: "🐶", noise: "woof")
-	# cat = Sound.create(emoji: "🐱", noise: "meow")
-	# frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
-	# fox = Sound.create(emoji: "🦊", noise: "rooooor")
-	# cow = Sound.create(emoji: "🐮", noise: "mooo")
-	# duck = Sound.create(emoji: "🦆", noise: "quack!!!")
+		def add_third_emoji
+			puts "Select your third emoji!"
+			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
+			@@third_emoji = prompt.select("Select an emoji", sound)
+			@@all << @@third_emoji
+			add_fourth_emoji
+		end
 
-	# guitar = Sound.create(emoji: "🎸", noise: "guitar")
-	# piano = Sound.create(emoji: "🎹", noise: "piano")
-	# trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
-	# violen = Sound.create(emoji: "🎻", noise: "violin")
-	# banjo = Sound.create(emoji: "🪕", noise: "banjo")
-	# sax = Sound.create(emoji: "🎷", noise: "Saxophone")
+			def add_fourth_emoji
+			puts "Select your fourth emoji!"
+			sound = Sound.all.map {|sounds| {sounds.emoji => sounds.id}}
+			@@fourth_emoji = prompt.select("Select an emoji", sound)
+			@@all << @@fourth_emoji
+			idk
+		end
+		add_first_emoji
+	end
 
-	# animals = Sampler.create(name: "Animals")
-	# music = Sampler.create(name: "Music")
-
+	def idk
+		puts @@all
+	end
 
 end
 
 
-
+# samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
+# sampler_id = prompt.select("Select an existing sampler", samplers)
