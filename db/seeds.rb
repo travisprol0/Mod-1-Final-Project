@@ -20,10 +20,10 @@ animals_sampler = SamplerSound.create(sound_id: 38, sampler_id: 8)
 # SamplerSound.new()
 
 
------------
-| 🐶 | 🐱 |
------------
-| 🐸 | 🦊 |
------------
+# -----------
+# |  | 🐱 |
+# -----------
+# | 🐸 | 🦊 |
+# -----------
 
-Use numbers to select an emoji. 1 is the top left, 4 is the bottom right.
+# Use numbers to select an emoji. 1 is the top left, 4 is the bottom right.

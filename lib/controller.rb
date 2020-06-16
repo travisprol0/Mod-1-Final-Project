@@ -13,5 +13,15 @@ class Controller
 	  	end
 	end
 
+	def define_board
+        @board = [" ", " ", " ", " "]
+    end
+
+    def display_board
+        puts "| #{@board[0]} | #{@board[1]} |"
+        puts "---------"
+        puts "| #{@board[2]} | #{@board[3]} |"
+    end
+
 end
 
