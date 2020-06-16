@@ -14,18 +14,19 @@ class Controller
 	end
 
 	def choose_sampler
-		prompt.select("Select an existing sampler") do |menu|
-			menu.choice "Animals", -> {animals_board}
-			menu.choice "Instruments", -> {puts "instruments sampler"}
-		end
+		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
+		sampler_id = prompt.select("Select an existing sampler", samplers)		#array of hashes, iterate through Sampler.all, key is name of sampler, value is id of the sampler 
+		@chosen_sampler = Sampler.find_by(id: sampler_id)
+		animals_board
 	end
 	
-
 	
 	def animals_board
-		@animals_board = ["🐶","🐱","🐸","🦊"]
+		@animals_board = @chosen_sampler.sounds.map {|sound| sound.emoji}
 		display_animals_board
-		"Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
+		# @animals_board = ["🐶","🐱","🐸","🦊"]
+		# display_animals_board
+		# "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
 	end
 
 	def display_animals_board
@@ -34,16 +35,16 @@ class Controller
 		puts "| #{@animals_board[2]} | #{@animals_board[3]} |"
 	end
 	
+	
+	
+	
+	
+	
+	
 	# def play_sounds
 	# 	puts "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
 	# 	user_input = gets.chomp
 	# end
-	
-	
-	
-	
-	
-	
 	
 	
 	def define_board

@@ -15,7 +15,8 @@ sax = Sound.create(emoji: "🎷", noise: "Saxophone")
 animals = Sampler.create(name: "Animals")
 music = Sampler.create(name: "Music")
 
-animals_sampler = SamplerSound.create(sound_id: 38, sampler_id: 8)
+animals_sampler = SamplerSound.create(sound_id: frog.id, sampler_id: animals.id)
+animals_sampler = SamplerSound.create(sound: dog, sampler: animals)
 
 # SamplerSound.new()
 
