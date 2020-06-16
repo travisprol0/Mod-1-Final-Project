@@ -6,4 +6,4 @@ require_relative '../config/environment'
 board = controller_instance.define_board()
 # controller_instance.display_board()
 binding.pry
-puts "hello world"
+puts "this is the run file"

@@ -1,5 +1,5 @@
 class Controller
-	attr_accessor :prompt 
+	attr_accessor :prompt, :sound
 
 	def initialize()
 		@prompt = TTY::Prompt.new
@@ -21,19 +21,23 @@ class Controller
 	end
 	
 
-	@animals_board = [""]
 	
 	def animals_board
-		puts "this is the animals board"
+		@animals_board = ["🐶","🐱","🐸","🦊"]
+		display_animals_board
+		"Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
 	end
 
-	# def display_animals_board
-	# 	puts "| #{@animals_board[0]} | #{@animals_board[1]} |"
-	# 	puts "---------"
-	# 	puts "| #{@animals_board[2]} | #{@animals_board[3]} |"
+	def display_animals_board
+		puts "| #{@animals_board[0]} | #{@animals_board[1]} |"
+		puts "---------"
+		puts "| #{@animals_board[2]} | #{@animals_board[3]} |"
+	end
+	
+	# def play_sounds
+	# 	puts "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
+	# 	user_input = gets.chomp
 	# end
-	
-	
 	
 	
 	
@@ -53,30 +57,30 @@ class Controller
     end
 
 	# animal-board
-	Sound.create(emoji: "🐶", noise: "woof")
-	Sound.create(emoji: "🐱", noise: "meow")
-	Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
-	Sampler.create(name: "Animals", sampler_id: 1)
-	animals = SamplerSound.where("sampler_id = 1" )
-	animal_emoji = animals.map{|animal| animal.sound}
-	animal_emoji.map{|animal| animal.emoji}
+	# Sound.create(emoji: "🐶", noise: "woof")
+	# Sound.create(emoji: "🐱", noise: "meow")
+	# Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
+	# Sampler.create(name: "Animals", sampler_id: 1)
+	# animals = SamplerSound.where("sampler_id = 1" )
+	# animal_emoji = animals.map{|animal| animal.sound}
+	# animal_emoji.map{|animal| animal.emoji}
 
-	dog = Sound.create(emoji: "🐶", noise: "woof")
-cat = Sound.create(emoji: "🐱", noise: "meow")
-frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
-fox = Sound.create(emoji: "🦊", noise: "rooooor")
-cow = Sound.create(emoji: "🐮", noise: "mooo")
-duck = Sound.create(emoji: "🦆", noise: "quack!!!")
+	# dog = Sound.create(emoji: "🐶", noise: "woof")
+	# cat = Sound.create(emoji: "🐱", noise: "meow")
+	# frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
+	# fox = Sound.create(emoji: "🦊", noise: "rooooor")
+	# cow = Sound.create(emoji: "🐮", noise: "mooo")
+	# duck = Sound.create(emoji: "🦆", noise: "quack!!!")
 
-guitar = Sound.create(emoji: "🎸", noise: "guitar")
-piano = Sound.create(emoji: "🎹", noise: "piano")
-trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
-violen = Sound.create(emoji: "🎻", noise: "violin")
-banjo = Sound.create(emoji: "🪕", noise: "banjo")
-sax = Sound.create(emoji: "🎷", noise: "Saxophone")
+	# guitar = Sound.create(emoji: "🎸", noise: "guitar")
+	# piano = Sound.create(emoji: "🎹", noise: "piano")
+	# trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
+	# violen = Sound.create(emoji: "🎻", noise: "violin")
+	# banjo = Sound.create(emoji: "🪕", noise: "banjo")
+	# sax = Sound.create(emoji: "🎷", noise: "Saxophone")
 
-animals = Sampler.create(name: "Animals")
-music = Sampler.create(name: "Music")
+	# animals = Sampler.create(name: "Animals")
+	# music = Sampler.create(name: "Music")
 
 
 end
