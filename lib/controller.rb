@@ -20,6 +20,7 @@ class Controller
 		end
 	end
 	
+
 	@animals_board = [""]
 	
 	def animals_board
@@ -51,5 +52,34 @@ class Controller
         puts "| #{@board[2]} | #{@board[3]} |"
     end
 
+	# animal-board
+	Sound.create(emoji: "🐶", noise: "woof")
+	Sound.create(emoji: "🐱", noise: "meow")
+	Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
+	Sampler.create(name: "Animals", sampler_id: 1)
+	animals = SamplerSound.where("sampler_id = 1" )
+	animal_emoji = animals.map{|animal| animal.sound}
+	animal_emoji.map{|animal| animal.emoji}
+
+	dog = Sound.create(emoji: "🐶", noise: "woof")
+cat = Sound.create(emoji: "🐱", noise: "meow")
+frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
+fox = Sound.create(emoji: "🦊", noise: "rooooor")
+cow = Sound.create(emoji: "🐮", noise: "mooo")
+duck = Sound.create(emoji: "🦆", noise: "quack!!!")
+
+guitar = Sound.create(emoji: "🎸", noise: "guitar")
+piano = Sound.create(emoji: "🎹", noise: "piano")
+trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
+violen = Sound.create(emoji: "🎻", noise: "violin")
+banjo = Sound.create(emoji: "🪕", noise: "banjo")
+sax = Sound.create(emoji: "🎷", noise: "Saxophone")
+
+animals = Sampler.create(name: "Animals")
+music = Sampler.create(name: "Music")
+
+
 end
+
+
 
