@@ -118,7 +118,3 @@ class Controller
 	end
 
 end
-
-
-# samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
-# sampler_id = prompt.select("Select an existing sampler", samplers)
