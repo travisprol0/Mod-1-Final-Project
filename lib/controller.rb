@@ -9,6 +9,7 @@ class Controller
 	      menu.choice "Create a sampler", -> {create_sampler}
 		  menu.choice "Use an existing sampler", -> {choose_sampler}
 		  menu.choice "Delete a sampler", -> {destroy_sampler}
+		  menu.choice "Update a sampler", -> {update_sampler}
 	  	end
 	end
 	def choose_sampler
@@ -93,6 +94,7 @@ class Controller
 		end
 		add_first_emoji
 	end
+
 	def chicken
 		emojis = @@all.map {|emoji| emoji.emoji}
 		@new_board = (
@@ -119,6 +121,16 @@ class Controller
 			end
 	end
 
+	def update_sampler
+		puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
+		old_name = prompt.ask("Which do you want to update?", required: true)
+		sampler_object = Sampler.all.find_by(name: old_name)
+		new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
+		sampler_object.update(name: new_name)
+		binding.pry
+	end
+	
+
 	def destroy_sampler
 		if Sampler.count == 0
 			puts "You have no samplers!"
@@ -130,9 +142,19 @@ class Controller
 			sampler_to_destroy = prompt.ask("Type the name of the sampler you would like to delete", required: true)
 			Sampler.find_by(name: sampler_to_destroy).destroy
 	end
+
+
+
+
 end
 
 
+	# def update_sampler
+	# 	puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
+	# 	name_of_sampler_to_update = prompt.ask("which do you want to update?", required: true)
+	# 	hi = Sampler.all.find_by(name: sampler_to_update)
+	# 	binding.pry
+	# end
 
 
 
