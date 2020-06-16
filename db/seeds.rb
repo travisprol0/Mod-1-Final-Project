@@ -1,3 +1,8 @@
+Sound.delete_all
+Sampler.delete_all
+SamplerSound.delete_all
+
+
 dog = Sound.create(emoji: "🐶", noise: "woof")
 cat = Sound.create(emoji: "🐱", noise: "meow")
 frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
@@ -15,8 +20,11 @@ sax = Sound.create(emoji: "🎷", noise: "Saxophone")
 animals = Sampler.create(name: "Animals")
 music = Sampler.create(name: "Music")
 
-animals_sampler = SamplerSound.create(sound_id: frog.id, sampler_id: animals.id)
-animals_sampler = SamplerSound.create(sound: dog, sampler: animals)
+
+SamplerSound.create(sound: dog, sampler: animals)
+SamplerSound.create(sound: cat, sampler: animals)
+SamplerSound.create(sound: frog, sampler: animals)
+SamplerSound.create(sound: duck, sampler: animals)
 
 # SamplerSound.new()
 

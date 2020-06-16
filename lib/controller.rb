@@ -17,25 +17,34 @@ class Controller
 		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
 		sampler_id = prompt.select("Select an existing sampler", samplers)		#array of hashes, iterate through Sampler.all, key is name of sampler, value is id of the sampler 
 		@chosen_sampler = Sampler.find_by(id: sampler_id)
-		animals_board
+		board		#generalize this
 	end
 	
 	
-	def animals_board
-		@animals_board = @chosen_sampler.sounds.map {|sound| sound.emoji}
-		display_animals_board
+	def board
+		@board = @chosen_sampler.sounds.map {|sound| sound.emoji}
+		display_board
 		# @animals_board = ["🐶","🐱","🐸","🦊"]
 		# display_animals_board
 		# "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
 	end
 
-	def display_animals_board
-		puts "| #{@animals_board[0]} | #{@animals_board[1]} |"
-		puts "---------"
-		puts "| #{@animals_board[2]} | #{@animals_board[3]} |"
+	def display_board
+		@board
+		# @chosen_sampler.sounds
+		# @new_board = (puts "| #{@board[0]} | #{@board[1]} |"
+		# puts "---------"
+		# puts "| #{@board[2]} | #{@board[3]} |")
+		# @new_board
+		# puts ""
+		# puts "Select a number 1-4"
+	end
+
+	def puts_sounds
+
 	end
 	
-	
+	#@chosen_sampler.sounds
 	
 	
 	
@@ -47,15 +56,15 @@ class Controller
 	# end
 	
 	
-	def define_board
-        @board = [" ", " ", " ", " "]
-    end
+	# def define_board
+    #     @board = [" ", " ", " ", " "]
+    # end
 
-    def display_board
-        puts "| #{@board[0]} | #{@board[1]} |"
-        puts "---------"
-        puts "| #{@board[2]} | #{@board[3]} |"
-    end
+    # def display_board
+    #     puts "| #{@board[0]} | #{@board[1]} |"
+    #     puts "---------"
+    #     puts "| #{@board[2]} | #{@board[3]} |"
+    # end
 
 	# animal-board
 	# Sound.create(emoji: "🐶", noise: "woof")
