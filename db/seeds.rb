@@ -31,6 +31,10 @@ SamplerSound.create(sound: piano, sampler: music)
 SamplerSound.create(sound: trumpet, sampler: music)
 SamplerSound.create(sound: violin, sampler: music)
 
+fire = Sound.create(emoji: "🔥", noise: "fire")
+bowling = Sound.create(emoji: "🎳", noise: "bowling")
+snare = Sound.create(emoji: "🥁", noise: "snare")
+heart = Sound.create(emoji: "💗", noise: "heart")
 
 # SamplerSound.new()
 
