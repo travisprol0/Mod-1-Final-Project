@@ -159,7 +159,7 @@ class Controller
 		
 		noise = Sound.all.map{|sound| sound.noise}
 		user_noise = prompt.select("Select an existing sampler", noise)
-		sound = pid = fork{ exec 'afplay', "/Users/AndyXcode/flatiron/code/PROJECTS/Mod-1-Final-Project/audio/#{user_noise}.mp3" }
+		sound = pid = fork{ exec 'afplay', "./audio/#{user_noise}.mp3" }
 		binding.pry
 	end
 
