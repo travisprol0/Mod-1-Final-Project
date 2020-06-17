@@ -120,7 +120,7 @@ class Controller
 					@chosen_sampler = Sampler.find_by(id: sampler_id)
 					board
 				end
-				prompt.select("Would you like to do to?") do |menu|
+				prompt.select("Would you like to:") do |menu|
 					menu.choice "Use #{@sampler_name}", -> {use_sampler_name}
 					menu.choice "Return to main menu", -> {greetings}
 				end
