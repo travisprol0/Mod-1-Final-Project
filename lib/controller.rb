@@ -77,54 +77,31 @@ class Controller
 			@all = []
 			def add_first_emoji
 				puts "Select your first emoji!"
-				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
-				@@first_emoji = prompt.select("Select an emoji", emoji)
-				sound = Sound.find_by(noise: @@first_emoji)
-				SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )
-				@all << sound
-				add_second_emoji
-			end
-	
-			def add_second_emoji
-				puts "Select your second emoji!"
-				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
-				@@second_emoji = prompt.select("Select an emoji", emoji)
-				sound = Sound.find_by(noise: @@second_emoji)
-				SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-				@all << sound
-				add_third_emoji
-			end
-	
-			def add_third_emoji
-				puts "Select your third emoji!"
-				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
-				@@third_emoji = prompt.select("Select an emoji", emoji)
-				sound = Sound.find_by(noise: @@third_emoji)
-				SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-				@all << sound
-				add_fourth_emoji
-			end
-			
-			def add_fourth_emoji
-				puts "Select your fourth emoji!"
-				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
-				@@fourth_emoji = prompt.select("Select an emoji", emoji)
-				sound = Sound.find_by(noise: @@fourth_emoji)
-				SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-				@all << sound
-				# chicken
+				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds}}
+				@sound_arr = prompt.multi_select("Select an emoji", emoji)
+				@i = 0 
+				while @i < 4
+					SamplerSound.create(sound_id: @sound_arr[@i].id, sampler_id: @new_sampler.id )
+					@i += 1
+				end
+							# binding.pry
+		
+				@all << @sound_arr
 				puts "#{@sampler_name} has been created"
-				sleep(2)
+		
+			# binding.pry
+
+				prompt.select("Would you like to:") do |menu|
+					menu.choice "Use #{@sampler_name}", -> {use_sampler_name}
+					menu.choice "Return to main menu", -> {greetings}
+				end				
+			end
+
 				def use_sampler_name
 					sampler_id = Sampler.last.id
 					@chosen_sampler = Sampler.find_by(id: sampler_id)
 					board
 				end
-				prompt.select("Would you like to:") do |menu|
-					menu.choice "Use #{@sampler_name}", -> {use_sampler_name}
-					menu.choice "Return to main menu", -> {greetings}
-				end
-			end
 			add_first_emoji
 		end
 		add_emojis
