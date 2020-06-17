@@ -2,11 +2,20 @@ class Controller
 	attr_accessor :prompt, :sound
 	def initialize()
 		@prompt = TTY::Prompt.new
+		#keypress
+		prompt.on(:keypress) do |event|
+		  if event.value == 'q'
+				prompt.select("") do |menu|
+		  		menu.choice "Go back to main menu", -> {greetings}
+		  end
+		end
+		end
 	end
+
 	def greetings
 		puts "Welcome to Sampler Sounds"
 		 prompt.select("What would you like to do?") do |menu|
-	      menu.choice "Create a sampler", -> {create_sampler}
+	    menu.choice "Create a sampler", -> {create_sampler}
 		  menu.choice "Use an existing sampler", -> {choose_sampler}
 		  menu.choice "Delete a sampler", -> {destroy_sampler}
 		  menu.choice "Update a sampler", -> {update_sampler}
@@ -142,9 +151,6 @@ class Controller
 			sampler_to_destroy = prompt.ask("Type the name of the sampler you would like to delete", required: true)
 			Sampler.find_by(name: sampler_to_destroy).destroy
 	end
-
-
-
 
 end
 
