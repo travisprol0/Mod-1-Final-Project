@@ -4,7 +4,7 @@ class Controller
 		@prompt = TTY::Prompt.new
 		#keypress
 		prompt.on(:keypress) do |event|
-		  if event.value == 'q'
+		  if event.value == 'esc'
 				prompt.select("") do |menu|
 		  		menu.choice "Go back to main menu", -> {greetings}
 		  end
@@ -78,7 +78,7 @@ class Controller
 			def add_first_emoji
 				puts "Select your first emoji!"
 				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds}}
-				@sound_arr = prompt.multi_select("Select 4 emojis Using Your Space 🚀 bar", emoji)
+				@sound_arr = prompt.multi_select("Select 4 emojis Using Your Space 🚀 bar", emoji, min:4, max:4)
 				SamplerSound.create(sound_id: @sound_arr[0].id, sampler_id: @new_sampler.id )
 				@i = 0 
 				while @i < 4
