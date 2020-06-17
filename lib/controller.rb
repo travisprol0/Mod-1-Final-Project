@@ -85,7 +85,6 @@ class Controller
 					SamplerSound.create(sound_id: @sound_arr[@i].id, sampler_id: @new_sampler.id )
 					@i += 1
 				end
-							# binding.pry
 				@all << @sound_arr
 				puts "#{@sampler_name} has been created"
 		
@@ -108,14 +107,40 @@ class Controller
 	end
 
 	def update_sampler
+		@all = []
+		
 		puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
 		old_name = prompt.ask("Which do you want to update?", required: true)
-		sampler_object = Sampler.all.find_by(name: old_name)
-		new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
-		sampler_object.update(name: new_name)
-		puts "Your sampler has been updated"
-		sleep(2)
-		greetings
+		@sampler_object = Sampler.all.find_by(name: old_name)
+		
+		def update_name
+			@new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
+			@sampler_object.update(name: @new_name)
+			# binding.pry
+			puts "Your sampler has been updated"
+			sleep(2)
+			greetings
+		end
+		
+		def update_emojis
+
+			puts "Select your first emoji!"
+				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds}}
+				@sound_arr = prompt.multi_select("Select 4 emojis Using Your Space 🚀 bar", emoji, min:4, max:4)
+				SamplerSound.create(sound_id: @sound_arr[0].id, sampler_id: @new_sampler.id )
+				@i = 0 
+				while @i < 4
+					SamplerSound.create(sound_id: @sound_arr[@i].id, sampler_id: @new_sampler.id )
+					@i += 1
+				end
+				@all << @sound_arr
+		end
+		
+		prompt.select("What would you like to do?") do |menu|
+			menu.choice "Update name", -> {update_name}
+			menu.choice "Update emojis", -> {update_emojis}
+		end
+		
 	end
 	
 	def destroy_sampler
