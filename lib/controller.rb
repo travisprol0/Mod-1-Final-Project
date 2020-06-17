@@ -55,14 +55,14 @@ class Controller
 		add_emojis
 	end
 	def add_emojis
-		@@all = []
+		@all = []
 		def add_first_emoji
 			puts "Select your first emoji!"
 			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
 			@@first_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@first_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )
-			@@all << sound
+			@all << sound
 			add_second_emoji
 		end
 		def add_second_emoji
@@ -71,7 +71,7 @@ class Controller
 			@@second_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@second_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-			@@all << sound
+			@all << sound
 			add_third_emoji
 		end
 		def add_third_emoji
@@ -80,7 +80,7 @@ class Controller
 			@@third_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@third_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-			@@all << sound
+			@all << sound
 			add_fourth_emoji
 		end
 			def add_fourth_emoji
@@ -89,37 +89,37 @@ class Controller
 			@@fourth_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@fourth_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
-			@@all << sound
+			@all << sound
 			chicken
 		end
-		add_first_emoji
-	end
-
-	def chicken
-		emojis = @@all.map {|emoji| emoji.emoji}
-		@new_board = (
-		puts "| #{emojis[0]} | #{emojis[1]} |"
-		puts "---------"
-		puts "| #{emojis[2]} | #{emojis[3]} |")
-		puts ""
-		puts "Select a number 1-4"
-		puts_sounds
-	end
-
-	def puts_sounds
-			answer = gets.chomp
-			answer = answer.to_i
-			answer = answer - 1
-			
-			if answer > 3 || answer < 0
-				puts "Please choose a number between 1-4"
-				sleep(2)
-			else
-				@sounds = @@all.map {|emoji| emoji.noise}
-				puts @sounds[answer]
-				chicken
+		def chicken
+			emojis = @all.map {|emoji| emoji.emoji}
+			@new_board = (
+				puts "| #{emojis[0]} | #{emojis[1]} |"
+				puts "---------"
+				puts "| #{emojis[2]} | #{emojis[3]} |")
+				puts ""
+				puts "Select a number 1-4"
+				puts_sounds
 			end
+			
+			def puts_sounds
+				answer = gets.chomp
+				answer = answer.to_i
+				answer = answer - 1
+				
+				if answer > 3 || answer < 0
+					puts "Please choose a number between 1-4"
+					sleep(2)
+				else
+					@sounds = @all.map {|emoji| emoji.noise}
+					puts @sounds[answer]
+					chicken
+				end
+			end
+			add_first_emoji
 	end
+
 
 	def update_sampler
 		puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
