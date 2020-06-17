@@ -138,6 +138,7 @@ class Controller
 		sampler_object.update(name: new_name)
 		puts "Your sampler has been updated"
 		sleep(2)
+		greetings
 	end
 	
 	def destroy_sampler
