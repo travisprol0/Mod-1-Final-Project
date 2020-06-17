@@ -45,7 +45,8 @@ class Controller
 					display_board
 				else
 					@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
-					puts @sounds[answer]
+					@sounds = @sounds[answer]
+					pid = fork{ exec 'afplay', "./audio/#{@sounds}.mp3" }
 					display_board
 				end
 			elsif
