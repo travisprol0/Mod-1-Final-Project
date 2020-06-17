@@ -5,17 +5,17 @@ SamplerSound.delete_all
 
 dog = Sound.create(emoji: "🐶", noise: "woof")
 cat = Sound.create(emoji: "🐱", noise: "meow")
-frog = Sound.create(emoji: "🐸", noise: "ribbbbiiiit")
+frog = Sound.create(emoji: "🐸", noise: "ribbit")
 lion = Sound.create(emoji: "🦁", noise: "rawr")
 cow = Sound.create(emoji: "🐮", noise: "mooo")
-duck = Sound.create(emoji: "🦆", noise: "quack!!!")
+duck = Sound.create(emoji: "🦆", noise: "quack")
 
 guitar = Sound.create(emoji: "🎸", noise: "guitar")
 piano = Sound.create(emoji: "🎹", noise: "piano")
 trumpet = Sound.create(emoji: "🎺", noise: "trumpet")
 violin = Sound.create(emoji: "🎻", noise: "violin")
 banjo = Sound.create(emoji: "🪕", noise: "banjo")
-sax = Sound.create(emoji: "🎷", noise: "Saxophone")
+sax = Sound.create(emoji: "🎷", noise: "saxophone")
 
 animals = Sampler.create(name: "Animals")
 music = Sampler.create(name: "Music")

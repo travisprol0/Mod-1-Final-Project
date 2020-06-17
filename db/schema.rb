@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_06_15_212038) do
 
   create_table "sounds", force: :cascade do |t|
     t.string "emoji"
-    t.string "noise"
+    t.text "noise"
   end
 
 end

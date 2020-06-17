@@ -125,7 +125,9 @@ class Controller
 				sleep(2)
 			else
 				@sounds = @@all.map {|emoji| emoji.noise}
-				puts @sounds[answer]
+				@sounds = @sounds[answer]
+				pid = fork{ exec 'afplay', "/Users/AndyXcode/flatiron/code/PROJECTS/Mod-1-Final-Project/audio/#{@sounds}.mp3" }
+
 				chicken
 			end
 	end
@@ -152,7 +154,18 @@ class Controller
 			Sampler.find_by(name: sampler_to_destroy).destroy
 	end
 
+
+	def play_sound
+		
+		noise = Sound.all.map{|sound| sound.noise}
+		user_noise = prompt.select("Select an existing sampler", noise)
+		sound = pid = fork{ exec 'afplay', "/Users/AndyXcode/flatiron/code/PROJECTS/Mod-1-Final-Project/audio/#{user_noise}.mp3" }
+		binding.pry
+	end
+
 end
+
+
 
 
 	# def update_sampler
