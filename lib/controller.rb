@@ -126,7 +126,7 @@ class Controller
 			else
 				@sounds = @@all.map {|emoji| emoji.noise}
 				@sounds = @sounds[answer]
-				pid = fork{ exec 'afplay', "/Users/AndyXcode/flatiron/code/PROJECTS/Mod-1-Final-Project/audio/#{@sounds}.mp3" }
+				pid = fork{ exec 'afplay', "./audio/#{@sounds}.mp3" }
 
 				chicken
 			end
