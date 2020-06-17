@@ -105,8 +105,13 @@ class Controller
 				# chicken
 				puts "#{@sampler_name} has been created"
 				sleep(2)
+				def use_sampler_name
+					sampler_id = Sampler.last.id
+					@chosen_sampler = Sampler.find_by(id: sampler_id)
+					board
+				end
 				prompt.select("Would you like to do to?") do |menu|
-					menu.choice "Use #{@sampler_name}", -> {puts "working on it"}
+					menu.choice "Use #{@sampler_name}", -> {use_sampler_name}
 					menu.choice "Return to main menu", -> {greetings}
 				end
 			end
