@@ -12,9 +12,11 @@ class Controller
 		  menu.choice "Update a sampler", -> {update_sampler}
 	  	end
 	end
+
 	def choose_sampler
 		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
-		sampler_id = prompt.select("Select an existing sampler", samplers)		#array of hashes, iterate through Sampler.all, key is name of sampler, value is id of the sampler 
+		menu = "Return to Main Menu"
+		sampler_id = prompt.select("Select an existing sampler", samplers)
 		@chosen_sampler = Sampler.find_by(id: sampler_id)
 		board
 		end
@@ -22,38 +24,49 @@ class Controller
 	def board
 		@board = @chosen_sampler.sounds.map {|sound| sound.emoji}
 		display_board
-		# @animals_board = ["🐶","🐱","🐸","🦊"]
-		# display_animals_board
-		# "Use numbers to select an emoji. 1 is the top left, 4 is the bottom right."
 	end
+
 	def display_board
 		@new_board = (
 		puts "| #{@board[0]} | #{@board[1]} |"
 		puts "---------"
 		puts "| #{@board[2]} | #{@board[3]} |")
 		puts ""
-		puts "Select a number 1-4"
+		puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
 		puts_sounds
 	end
+
 	def puts_sounds
 			answer = gets.chomp
-			answer = answer.to_i
-			answer = answer - 1
-			if answer > 3 || answer < 0
-				puts "Please choose a number between 1-4"
-				sleep(2)
-				display_board
+			if answer.length == 1
+				answer = answer.to_i
+				answer = answer - 1
+				if answer > 3 || answer < 0
+					puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+					sleep(2)
+					display_board
+				else
+					@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
+					puts @sounds[answer]
+					display_board
+				end
+			elsif
+				answer == "return" || answer == '"return"'
+				greetings
 			else
-				@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
-				puts @sounds[answer]
-				display_board
+				puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+					sleep(2)
+					display_board
 			end
+
 	end
+
 	def create_sampler
 		sampler_name = prompt.ask("What is the name of your new sampler?", required: true)
 		@new_sampler = Sampler.create(name: sampler_name)
 		add_emojis
 	end
+
 	def add_emojis
 		@all = []
 		def add_first_emoji
@@ -65,6 +78,7 @@ class Controller
 			@all << sound
 			add_second_emoji
 		end
+
 		def add_second_emoji
 			puts "Select your second emoji!"
 			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
@@ -74,6 +88,7 @@ class Controller
 			@all << sound
 			add_third_emoji
 		end
+
 		def add_third_emoji
 			puts "Select your third emoji!"
 			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
@@ -83,42 +98,54 @@ class Controller
 			@all << sound
 			add_fourth_emoji
 		end
-			def add_fourth_emoji
+		def add_fourth_emoji
 			puts "Select your fourth emoji!"
 			emoji = Sound.all.map {|sounds| {sounds.emoji => sounds.noise}}
 			@@fourth_emoji = prompt.select("Select an emoji", emoji)
 			sound = Sound.find_by(noise: @@fourth_emoji)
 			SamplerSound.create(sound_id: sound.id, sampler_id: @new_sampler.id )			
 			@all << sound
-			chicken
+			# chicken
+			greetings
+			puts ""
 		end
-		def chicken
-			emojis = @all.map {|emoji| emoji.emoji}
-			@new_board = (
-				puts "| #{emojis[0]} | #{emojis[1]} |"
-				puts "---------"
-				puts "| #{emojis[2]} | #{emojis[3]} |")
-				puts ""
-				puts "Select a number 1-4"
-				puts_sounds
-			end
+		# def chicken
+		# 	emojis = @all.map {|emoji| emoji.emoji}
+		# 	@new_board = (
+		# 		puts "| #{emojis[0]} | #{emojis[1]} |"
+		# 		puts "---------"
+		# 		puts "| #{emojis[2]} | #{emojis[3]} |")
+		# 		puts ""
+		# 		puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+		# 		puts_sounds
+		# 	end
 			
-			def puts_sounds
-				answer = gets.chomp
-				answer = answer.to_i
-				answer = answer - 1
-				
-				if answer > 3 || answer < 0
-					puts "Please choose a number between 1-4"
-					sleep(2)
-				else
-					@sounds = @all.map {|emoji| emoji.noise}
-					puts @sounds[answer]
-					chicken
-				end
-			end
-			add_first_emoji
+		# def puts_sounds
+		# 	answer = gets.chomp
+		# 	if answer.length == 1
+		# 		answer = answer.to_i
+		# 		answer = answer - 1
+		# 		if answer > 3 || answer < 0
+		# 			puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+		# 			sleep(2)
+		# 			display_board
+		# 		else
+		# 			@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
+		# 			puts @sounds[answer]
+		# 			display_board
+		# 		end
+		# 	elsif
+		# 		answer == "return" || answer == '"return"'
+		# 		greetings
+		# 	else
+		# 		puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+		# 			sleep(2)
+		# 			display_board
+		# 	end
+		add_first_emoji
+
 	end
+	# end
 
 
 	def update_sampler
@@ -141,6 +168,9 @@ class Controller
 			#{Sampler.all.map{|sampler| sampler.name}}"
 			sampler_to_destroy = prompt.ask("Type the name of the sampler you would like to delete", required: true)
 			Sampler.find_by(name: sampler_to_destroy).destroy
+			puts "#{sampler_to_destroy} has been deleted!"
+			sleep(2)
+			greetings
 	end
 
 
