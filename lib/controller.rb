@@ -79,7 +79,7 @@ class Controller
 				puts "Select your first emoji!"
 				emoji = Sound.all.map {|sounds| {sounds.emoji => sounds}}
 				@sound_arr = prompt.multi_select("Select 4 emojis Using Your Space 🚀 bar", emoji, min:4, max:4)
-				SamplerSound.create(sound_id: @sound_arr[0].id, sampler_id: @new_sampler.id )
+				# SamplerSound.create(sound_id: @sound_arr[0].id, sampler_id: @new_sampler.id )
 				@i = 0 
 				while @i < 4
 					SamplerSound.create(sound_id: @sound_arr[@i].id, sampler_id: @new_sampler.id )
@@ -110,8 +110,8 @@ class Controller
 		@new_emojis = []
 		
 		puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
-		old_name = prompt.ask("Which do you want to update?", required: true)
-		@sampler_object = Sampler.all.find_by(name: old_name)
+		@old_name = prompt.ask("Which do you want to update?", required: true)
+		@sampler_object = Sampler.all.find_by(name: @old_name)
 		
 		
 		def update_name
@@ -124,10 +124,19 @@ class Controller
 		end
 		
 		def update_emojis
-
+			# Sampler.all.find_by(name: @old_name).destroy
+			
+			
+			
+			# 1. Select all SamplerSounds for this sampler
+			# 2. Iterate through all samplerSounds				for loop?
+			# 3. Change sounds
+			
+			
 			puts "Feature coming soon!"
-			sleep(2)
-			greetings
+			# binding.pry
+			# sleep(2)
+			# greetings
 
 
 			# puts "Select your first emoji!"
