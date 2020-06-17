@@ -136,7 +136,8 @@ class Controller
 		sampler_object = Sampler.all.find_by(name: old_name)
 		new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
 		sampler_object.update(name: new_name)
-		binding.pry
+		puts "Your sampler has been updated"
+		sleep(2)
 	end
 	
 	def destroy_sampler
