@@ -2,7 +2,16 @@ class Controller
 	attr_accessor :prompt, :sound
 	def initialize()
 		@prompt = TTY::Prompt.new
+		#keypress
+		prompt.on(:keypress) do |event|
+		  if event.value == 'q'
+				prompt.select("") do |menu|
+		  		menu.choice "Go back to main menu", -> {greetings}
+		  end
+		end
+		end
 	end
+	
 	def greetings
 		puts "Welcome to Sampler Sounds"
 		 prompt.select("What would you like to do?") do |menu|
