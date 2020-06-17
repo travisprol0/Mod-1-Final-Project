@@ -81,14 +81,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (~> 5.2)
+  activerecord
   faker
   pry
   require_all
   rest-client
+  sinatra
   sinatra-activerecord
-  sqlite3 (~> 1.3.6)
+  sqlite3
   tty-prompt
 
 BUNDLED WITH
-   2.1.2
+   2.1.4

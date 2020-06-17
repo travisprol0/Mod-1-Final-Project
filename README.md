@@ -2,6 +2,7 @@
 How to use Sampler Sounds
 1. Clone or fork this repository on github 
 2. Use Bundle install - to install all the gems associated with the project
+2. Run rake db:seed to log all of the emojis and existing samplers 
 3. Run the project, in the root directory run ruby bin/run.rb
 4. Choose an Exisiting Sampelr
 5. Create your own sampler
