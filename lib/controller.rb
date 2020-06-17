@@ -15,11 +15,9 @@ class Controller
 
 	def choose_sampler
 		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
-		menu = "Return to Main Menu"
 		sampler_id = prompt.select("Select an existing sampler", samplers)
 		@chosen_sampler = Sampler.find_by(id: sampler_id)
 		board
-		end
 	end
 	def board
 		@board = @chosen_sampler.sounds.map {|sound| sound.emoji}
@@ -108,7 +106,7 @@ class Controller
 				puts "#{@sampler_name} has been created"
 				sleep(2)
 				prompt.select("Would you like to do to?") do |menu|
-					menu.choice "Use #{@sampler_name}", -> {"working on it"}
+					menu.choice "Use #{@sampler_name}", -> {puts "working on it"}
 					menu.choice "Return to main menu", -> {greetings}
 				end
 			end
