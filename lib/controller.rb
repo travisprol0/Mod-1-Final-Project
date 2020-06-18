@@ -124,8 +124,8 @@ class Controller
 		end
 		
 		def update_emojis
-			# Sampler.all.find_by(name: @old_name).destroy
-			
+			hi = SamplerSound.all.map {|sound| sound.sampler_id == @sampler_object}
+			binding.pry
 			
 			
 			# 1. Select all SamplerSounds for this sampler
