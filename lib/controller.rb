@@ -1,3 +1,5 @@
+system "clear"
+
 class Controller
 	attr_accessor :prompt, :sound
 	def initialize()
@@ -34,6 +36,7 @@ class Controller
 	end
 
 	def display_board
+				system "clear"
 		@new_board = (
 		puts "            "
 		# puts "			       #{@sampler_name}	"
@@ -64,7 +67,8 @@ class Controller
 					@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
 					@sounds = @sounds[answer]
 					pid = fork{ exec 'afplay', "./db/audio/#{@sounds}.mp3" }
-					puts_sounds
+					system "clear"
+					display_board
 				end
 			elsif
 				answer == "return" || answer == '"return"'
@@ -72,7 +76,8 @@ class Controller
 			else
 				puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
 					sleep(2)
-					puts_sounds
+					system "clear"
+					display_board
 			end
 
 	end
