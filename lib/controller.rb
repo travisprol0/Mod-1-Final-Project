@@ -15,12 +15,13 @@ class Controller
 	end
 	
 	def greetings
+		system "clear"
 		puts "Welcome to Sampler Sounds"
 		 prompt.select("What would you like to do?") do |menu|
 	      menu.choice "Create a sampler", -> {create_sampler}
 		  menu.choice "Use an existing sampler", -> {choose_sampler}
-		  menu.choice "Delete a sampler", -> {destroy_sampler}
 		  menu.choice "Update a sampler", -> {update_sampler}
+		  menu.choice "Delete a sampler", -> {destroy_sampler}
 	  	end
 	end
 
@@ -76,7 +77,7 @@ class Controller
 				answer == "return" || answer == '"return"'
 				greetings
 			else
-				puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+				puts '                    ** select a number from 1-4 **'.colorize(:red)
 					sleep(1)
 					system "clear"
 					display_board
