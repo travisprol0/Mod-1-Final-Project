@@ -4,7 +4,7 @@ class Controller
 		@prompt = TTY::Prompt.new
 		#keypress
 		prompt.on(:keypress) do |event|
-		  if event.value == 'esc'
+		  if event.value == 'q'
 				prompt.select("") do |menu|
 		  		menu.choice "Go back to main menu", -> {greetings}
 		  end
@@ -35,10 +35,17 @@ class Controller
 
 	def display_board
 		@new_board = (
-		puts "| #{@board[0]} | #{@board[1]} |"
-		puts "---------"
-		puts "| #{@board[2]} | #{@board[3]} |")
+		puts "            "
+		puts "			       Your Sampler	"
+		puts "            "		
+		puts "                                ==========="
+		puts "				| #{@board[0]} | #{@board[1]} |"
+		puts "				―――――――――――"
+		puts "				| #{@board[2]} | #{@board[3]} |")
+		puts "                                ==========="		
 		puts ""
+		puts "            "		
+
 		puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
 		puts_sounds
 	end
