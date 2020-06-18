@@ -125,8 +125,12 @@ class Controller
 		end
 		
 		def update_emojis
-			hi = SamplerSound.all.map {|sound| sound.sampler_id == @sampler_object}
+			sampler_sounds = SamplerSound.all.select {|sound| sound.sampler_id == @chosen_sampler.id}
 			binding.pry
+
+
+
+			#update sound_id
 			
 			# 1. Select all SamplerSounds for this sampler
 			# 2. Iterate through all samplerSounds				for loop?
