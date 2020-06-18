@@ -108,15 +108,16 @@ class Controller
 
 	def update_sampler
 		@new_emojis = []
-		
-		puts "Here are your samplers: #{Sampler.all.map{|sampler| sampler.name}}"
-		@old_name = prompt.ask("Which do you want to update?", required: true)
-		@sampler_object = Sampler.all.find_by(name: @old_name)
+		samplers = Sampler.all.map {|sampler| {sampler.name => sampler.id}}
+		sampler_id = prompt.select("Select a sampler to update", samplers)
+		@chosen_sampler = Sampler.find_by(id: sampler_id)
+
 		
 		
 		def update_name
 			@new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
-			@sampler_object.update(name: @new_name)
+			@chosen_sampler.update(name: @new_name)
+			
 			# binding.pry
 			puts "Your sampler has been updated"
 			sleep(2)
@@ -126,7 +127,6 @@ class Controller
 		def update_emojis
 			hi = SamplerSound.all.map {|sound| sound.sampler_id == @sampler_object}
 			binding.pry
-			
 			
 			# 1. Select all SamplerSounds for this sampler
 			# 2. Iterate through all samplerSounds				for loop?
