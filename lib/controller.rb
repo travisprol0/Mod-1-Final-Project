@@ -39,7 +39,7 @@ class Controller
 				system "clear"
 		@new_board = (
 		puts "            "
-		# puts "			       #{@sampler_name}	"
+		puts "			    Your Sampler: #{@chosen_sampler.name}	"
 		puts "            "		
 		puts "                                ==========="
 		puts "				| #{@board[0]} | #{@board[1]} |"
@@ -49,7 +49,8 @@ class Controller
 		puts ""
 		puts "            "		
 
-		puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
+		puts 'Select a number 1-4 to hear the sound'
+		puts 'Type "return" to return to main menu'
 		puts_sounds
 	end
 
