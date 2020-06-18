@@ -36,7 +36,7 @@ class Controller
 	def display_board
 		@new_board = (
 		puts "            "
-		puts "			       Your Sampler	"
+		# puts "			       #{@sampler_name}	"
 		puts "            "		
 		puts "                                ==========="
 		puts "				| #{@board[0]} | #{@board[1]} |"
@@ -58,12 +58,13 @@ class Controller
 				if answer > 3 || answer < 0
 					puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
 					sleep(2)
+					system "clear"
 					display_board
 				else
 					@sounds = @chosen_sampler.sounds.map {|sound|sound.noise}
 					@sounds = @sounds[answer]
 					pid = fork{ exec 'afplay', "./db/audio/#{@sounds}.mp3" }
-					display_board
+					puts_sounds
 				end
 			elsif
 				answer == "return" || answer == '"return"'
@@ -71,7 +72,7 @@ class Controller
 			else
 				puts 'Select a number 1-4 to hear the sound, or type "return" to return to main menu'
 					sleep(2)
-					display_board
+					puts_sounds
 			end
 
 	end
