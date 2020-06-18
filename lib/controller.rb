@@ -142,7 +142,7 @@ class Controller
 		
 		def update_emojis
 			sampler_sounds = SamplerSound.all.select {|sound| sound.sampler_id == @chosen_sampler.id}
-			binding.pry
+			
 
 
 
@@ -155,8 +155,8 @@ class Controller
 			
 			puts "Feature coming soon!"
 			# binding.pry
-			# sleep(2)
-			# greetings
+			sleep(2)
+			greetings
 
 
 			# puts "Select your first emoji!"
@@ -172,10 +172,11 @@ class Controller
 			# 	@new_emojis << @sound_arr
 		end
 		
-		prompt.select("What would you like to do?") do |menu|
-			menu.choice "Update name", -> {update_name}
-			menu.choice "Update emojis", -> {update_emojis}
-		end
+		# prompt.select("What would you like to do?") do |menu|
+			# menu.choice "Update name", -> {update_name}
+			# menu.choice "Update emojis", -> {update_emojis}
+		# end
+		update_name
 		
 	end
 	
