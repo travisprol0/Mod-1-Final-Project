@@ -39,7 +39,7 @@ class Controller
 				system "clear"
 		@new_board = (
 		puts "            "
-		# puts "			       #{@sampler_name}	"
+		puts "			    Your Sampler: #{@chosen_sampler.name}	"
 		puts "            "		
 		puts "                                ==========="
 		puts "				| #{@board[0]} | #{@board[1]} |"
