@@ -35,14 +35,3 @@ fire = Sound.create(emoji: "🔥", noise: "fire")
 bowling = Sound.create(emoji: "🎳", noise: "bowling")
 snare = Sound.create(emoji: "🥁", noise: "snare")
 heart = Sound.create(emoji: "💗", noise: "heart")
-
-# SamplerSound.new()
-
-
-# -----------
-# | 🐶 | 🐱 |
-# -----------
-# | 🐸 | 🦊 |
-# -----------
-
-# Use numbers to select an emoji. 1 is the top left, 4 is the bottom right.

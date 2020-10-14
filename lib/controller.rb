@@ -4,7 +4,6 @@ class Controller
 	attr_accessor :prompt, :sound
 	def initialize()
 		@prompt = TTY::Prompt.new
-		#keypress
 		prompt.on(:keypress) do |event|
 		  if event.value == 'q'
 				prompt.select("") do |menu|
@@ -103,8 +102,6 @@ class Controller
 							# binding.pry
 				@all << @sound_arr
 				puts "#{@sampler_name} has been created"
-		
-			# binding.pry
 
 				prompt.select("Would you like to:") do |menu|
 					menu.choice "Use #{@sampler_name}", -> {use_sampler_name}
@@ -133,8 +130,6 @@ class Controller
 		def update_name
 			@new_name = prompt.ask("Which do you want to rename your sampler?", required: true)
 			@chosen_sampler.update(name: @new_name)
-			
-			# binding.pry
 			puts "Your sampler has been updated"
 			sleep(2)
 			greetings
@@ -143,39 +138,10 @@ class Controller
 		def update_emojis
 			sampler_sounds = SamplerSound.all.select {|sound| sound.sampler_id == @chosen_sampler.id}
 			
-
-
-
-			#update sound_id
-			
-			# 1. Select all SamplerSounds for this sampler
-			# 2. Iterate through all samplerSounds				for loop?
-			# 3. Change sounds
-			
-			
 			puts "Feature coming soon!"
-			# binding.pry
 			sleep(2)
 			greetings
-
-
-			# puts "Select your first emoji!"
-			# 	emoji = Sound.all.map {|sounds| {sounds.emoji => sounds}}
-			# 	binding.pry
-			# 	@sound_arr = prompt.multi_select("Select 4 emojis Using Your Space 🚀 bar", emoji, min:4, max:4)
-			# 	SamplerSound.create(sound_id: @sound_arr[0].id, sampler_id: @new_sampler.id )
-			# 	@i = 0 
-			# 	while @i < 4
-			# 		SamplerSound.create(sound_id: @sound_arr[@i].id, sampler_id: @new_sampler.id )
-			# 		@i += 1
-			# 	end
-			# 	@new_emojis << @sound_arr
 		end
-		
-		# prompt.select("What would you like to do?") do |menu|
-			# menu.choice "Update name", -> {update_name}
-			# menu.choice "Update emojis", -> {update_emojis}
-		# end
 		update_name
 		
 	end

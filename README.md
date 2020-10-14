@@ -1,4 +1,3 @@
-#readme
 How to use Sampler Sounds
 1. Clone or fork this repository on github 
 2. Use Bundle install - to install all the gems associated with the project
